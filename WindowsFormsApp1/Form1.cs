@@ -72,6 +72,36 @@ namespace WindowsFormsApp1
                     double RozmiarPliku = len / 1000;//dzieląc przez 1000 przeliczamy bajty na kilobajty
                     label12.Text = (Math.Round(RozmiarPliku, 1).ToString()) + " KB";//zaokrągla wynik do jednego miejsca po przecinku
                     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    
+                    
+                    //zmiana obrazu na czarno-biały i ładowanie do pictureBox2
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    Bitmap bmp = new Bitmap(openFileDialog1.FileName);//czytanie obrazu z kontrolki pictureBox1, która jes po prawej str.
+
+                    int width = bmp.Width;//pobieranie wysokości
+                    int height = bmp.Height;//pobieranie szerokości
+
+                    Color KolorPoksela;//deklaracja klacy, żeby nadać pikselowi kolor w pętli
+
+                    for (int y = 0; y < bmp.Height; y++)//przechodzenie kolimna po kolumnie
+                    {
+                        for (int x = 0; x < bmp.Width; x++)//przechodzenie wiersz po wierszu
+                        {
+                            KolorPoksela = bmp.GetPixel(x, y);//pobieranie koloru piksela i zapis w zmiennej
+
+                            //wyciąganie właściwości "KolorPoksela"
+                            int a = KolorPoksela.A;
+                            int r = KolorPoksela.R;
+                            int g = KolorPoksela.G;
+                            int b = KolorPoksela.B;
+
+                            int avg = (r + g + b) / 3;//wyliczanie średniej
+
+                            bmp.SetPixel(x, y, Color.FromArgb(a, avg, avg, avg));//ładowanie wyliczonej wartości
+                        }
+                    }
+                    pictureBox2.Image = bmp;//ładowanie obrazu do kontrolki "pictureBox2"
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
             }
             catch (Exception ex)
