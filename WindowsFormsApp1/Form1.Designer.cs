@@ -99,10 +99,6 @@
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(965, 729);
