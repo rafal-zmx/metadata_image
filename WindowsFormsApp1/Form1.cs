@@ -42,6 +42,36 @@ namespace WindowsFormsApp1
                     label18.Visible = true;
                     label19.Visible = true;
                     label20.Visible = true;
+                    
+                    //Pobieranie danych zdjęcia
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    System.Drawing.Image zdjecie = System.Drawing.Image.FromFile(openFileDialog1.FileName);
+
+                    pictureBox1.ImageLocation = openFileDialog1.FileName;
+                    label2.Text = openFileDialog1.SafeFileName;
+                    label6.Text = zdjecie.Width + " x " + zdjecie.Height;
+                    label8.Text = zdjecie.Width + " pikseli";
+                    label10.Text = zdjecie.Height + " pikseli";
+                    label14.Text = zdjecie.Palette.ToString();
+                    label16.Text = zdjecie.HorizontalResolution.ToString();
+                    label18.Text = zdjecie.VerticalResolution.ToString();
+                    label20.Text = zdjecie.PixelFormat.ToString();
+
+
+                    if (zdjecie.RawFormat.ToString() == "[ImageFormat: b96b3cab-0728-11d3-9d7b-0000f81ef32e]")//jest to format *bmp
+                    {
+                        label4.Text = ".bmp";
+                    }
+                    if (zdjecie.RawFormat.ToString() == "[ImageFormat: b96b3cae-0728-11d3-9d7b-0000f81ef32e]")//jest to format *bmp
+                    {
+                        label4.Text = ".jpg";
+                    }
+
+                    string sciezka = openFileDialog1.FileName.ToString();//wyciągnięcie lokalizacji pliku, zamian na string i przypisanie do zmiennej
+                    double len = (new System.IO.FileInfo(sciezka)).Length;//biblioteka IO wyciąga wielkość pliku w bajtach
+                    double RozmiarPliku = len / 1000;//dzieląc przez 1000 przeliczamy bajty na kilobajty
+                    label12.Text = (Math.Round(RozmiarPliku, 1).ToString()) + " KB";//zaokrągla wynik do jednego miejsca po przecinku
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
             }
             catch (Exception ex)
